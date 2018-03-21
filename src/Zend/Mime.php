@@ -47,7 +47,7 @@ class Zend_Mime
     /**
      * Boundary
      *
-     * @var null|string
+     * @var string
      */
     protected $_boundary;
 

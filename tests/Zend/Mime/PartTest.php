@@ -20,10 +20,6 @@
  * @version    $Id$
  */
 
-/**
- * Zend_Mime_Part
- */
-require_once 'Zend/Mime/Part.php';
 
 /**
  * @category   Zend
@@ -114,7 +110,7 @@ class Zend_Mime_PartTest extends PHPUnit\Framework\TestCase
         fclose($fp);
         $this->assertEquals(quoted_printable_decode($encoded),$original);
     }
-    
+
     /**
      * @group ZF-1491
      */
@@ -122,5 +118,5 @@ class Zend_Mime_PartTest extends PHPUnit\Framework\TestCase
     {
         $this->assertEquals($this->testText, $this->part->getRawContent());
     }
-    
+
 }

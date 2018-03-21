@@ -20,10 +20,6 @@
  * @version    $Id$
  */
 
-/**
- * Zend_Mime_Message
- */
-require_once 'Zend/Mime/Message.php';
 
 /**
  * @category   Zend

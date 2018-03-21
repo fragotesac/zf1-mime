@@ -20,11 +20,6 @@
  * @version    $Id $
  */
 
-/** Zend_Mail */
-require_once 'Zend/Mail.php';
-
-/** Zend_Mime */
-require_once 'Zend/Mime.php';
 
 /**
  * @category   Zend
@@ -80,7 +75,7 @@ class Zend_MimeTest extends PHPUnit\Framework\TestCase
     {
         $raw = str_repeat('x',72) . '0';
         $quoted = Zend_Mime::encodeQuotedPrintable($raw, 72);
-        $expected = quoted_printable_decode($quoted);        
+        $expected = quoted_printable_decode($quoted);
         $this->assertEquals($expected, $raw);
     }
 
@@ -89,22 +84,6 @@ class Zend_MimeTest extends PHPUnit\Framework\TestCase
         $content = str_repeat("\x88\xAA\xAF\xBF\x29\x88\xAA\xAF\xBF\x29\x88\xAA\xAF", 4);
         $encoded = Zend_Mime::encodeBase64($content);
         $this->assertEquals($content, base64_decode($encoded));
-    }
-
-    public function testZf1058WhitespaceAtEndOfBodyCausesInfiniteLoop()
-    {
-        $mail = new Zend_Mail();
-        $mail->setSubject('my subject');
-        $mail->setBodyText("my body\r\n\r\n...after two newlines\r\n ");
-        $mail->setFrom('test@email.com');
-        $mail->addTo('test@email.com');
-
-        // test with generic transport
-        require_once 'Mail/MailTest.php';
-        $mock = new Zend_Mail_Transport_Sendmail_Mock();
-        $mail->send($mock);
-        $body = quoted_printable_decode($mock->body);
-        $this->assertContains("my body\r\n\r\n...after two newlines", $body, $body);
     }
 
     /**
@@ -166,5 +145,8 @@ class Zend_MimeTest extends PHPUnit\Framework\TestCase
                 $this->fail("Line '".$line."' is ".strlen($line)." chars long, only 40 allowed.");
             }
         }
+
+        // Test will fail if either fail statements are met, otherwise passes
+        $this->assertTrue(true);
     }
 }
